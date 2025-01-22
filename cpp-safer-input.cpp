@@ -1,6 +1,9 @@
 #include "cpp-safer-input.h"
 #include <iostream>
 #include <string>
+#include <cctype>
+#include <stdexcept>
+#include <limits>
 
 #if defined _WIN32
     #include <conio.h>
@@ -26,5 +29,34 @@ void CppSaferInput::clearConsole()
         system("clear");
 
     #endif
+}
+
+void CppSaferInput::ignoreExceedingInput()
+{
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+void CppSaferInput::pressEnterToContinue()
+{
+    std::cin.get();
+    ignoreExceedingInput();
+}
+
+bool CppSaferInput::parseYesNoInput()
+{
+    auto input{ std::tolower(getInput<unsigned char>()) };
+    
+    if (input != 'y' && input != 'n')
+        throw std::runtime_error("Input character was not a y/n character");
+
+    return input == 'y';
+}
+
+std::string CppSaferInput::getInputLine()
+{
+    std::string input{};
+    std::getline(std::cin >> std::ws, input);
+
+    return input; 
 }
 
