@@ -14,7 +14,7 @@ You only need to include the ```cpp-safe-io.h``` header file. Henceforth, all of
 
 main.cpp:
 ```
-#include "cpp-safe-io"
+#include "cpp-safe-io.h"
 #include <iostream>
 
 int main()
