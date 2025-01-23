@@ -9,7 +9,7 @@
     #include <conio.h>
 #endif
 
-void CppSaferInput::clearConsole() 
+void CppSafeIO::clearConsole() 
 {
     #if defined _WIN32
 
@@ -31,18 +31,18 @@ void CppSaferInput::clearConsole()
     #endif
 }
 
-void CppSaferInput::ignoreExceedingInput()
+void CppSafeIO::ignoreExceedingInput()
 {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-void CppSaferInput::pressEnterToContinue()
+void CppSafeIO::pressEnterToContinue()
 {
     std::cin.get();
     ignoreExceedingInput();
 }
 
-bool CppSaferInput::parseYesNoInput()
+bool CppSafeIO::parseYesNoInput()
 {
     auto input{ std::tolower(getInput<unsigned char>()) };
     
@@ -52,7 +52,7 @@ bool CppSaferInput::parseYesNoInput()
     return input == 'y';
 }
 
-std::string CppSaferInput::getInputLine()
+std::string CppSafeIO::getInputLine()
 {
     std::string input{};
     std::getline(std::cin >> std::ws, input);

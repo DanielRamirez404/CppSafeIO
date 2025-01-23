@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace CppSaferInput
+namespace CppSafeIO
 {
     void clearConsole();
     void pressEnterToContinue();
