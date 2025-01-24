@@ -1,4 +1,4 @@
-#include "cpp-safer-input.h"
+#include "cpp-safe-io.h"
 #include <iostream>
 #include <string>
 #include <cctype>
