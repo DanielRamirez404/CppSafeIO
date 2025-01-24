@@ -1,4 +1,4 @@
-# Cpp-Safe-IO
+# CppSafeIO
 
 > [!NOTE]
 > TL;DR: Portable and easy-to-use ```C++``` library which provides clean input/output operations.
