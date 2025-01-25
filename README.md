@@ -5,6 +5,9 @@
 
 ```C++```'s native input/output library (```iostream```) doesn't provide the kind of high-level functions that you might like to use in your own projects, such as clearing the console, or stopping the natural control flow until a given key is pressed. This library aims to solve that in an beginner-friendly approach!  
 
+### Tests running
+![](assets/test.gif)
+
 ## How to implement in your own projects, using ```CMake```
 
 > [!TIP]
@@ -45,7 +48,7 @@ Your project's main ```CMakeLists.txt```:
 include(FetchContent)
 
 FetchContent_Declare( cpp-safe-io 
-    GIT_REPOSITORY  https://github.com/DanielRamirez404/Cpp-Safe-IO.git 
+    GIT_REPOSITORY  https://github.com/DanielRamirez404/CppSafeIO.git 
     GIT_TAG         v1.1.0
     GIT_SHALLOW     TRUE 
 ) 
@@ -88,3 +91,8 @@ int main()
 * ```void ignoreExceedingInput()```: clears ```std::cin```'s buffer.
 * ```void parseYesNoInput()```: gets one character input and returns true or false if it matches the ```Y``` or ```N``` characters, respectively (case insensitive). On failure, it throws a ```std::runtime_error```.
 * ```std::string getInputLine():``` gets all entered input until a line break, as a ```std::string```.
+
+## Testing
+
+> [!TIP]
+> You can test this library's functions in the ```tests``` subdirectory.
