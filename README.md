@@ -5,6 +5,58 @@
 
 ```C++```'s native input/output library (```iostream```) doesn't provide the kind of high-level functions that you might like to use in your own projects, such as clearing the console, or stopping the natural control flow until a given key is pressed. This library aims to solve that in an beginner-friendly approach!  
 
+## How to implement in your own projects, using ```CMake```
+
+> [!TIP]
+> The simplest way to implement this library in your projects would be by fetching the library as a subfolder of a given project's build system, and ultimately, make use of ```include_directory()``` to execute this folder's ```CMakeLists.txt```, which makes it possible to use ```target_link_libraries()``` with your executable and the CppSafeIO library, as follows:
+
+Your project's directory structure:
+```
+./project
+    CMakeLists.txt
+    /src
+    /CppSafeIO
+```
+
+Your project's main ```CMakeLists.txt```:
+```
+...
+
+add_subdirectory(CppSafeIO)
+target_link_libraries(YourExecutable CppSafeIO)
+
+...
+```
+
+> [!NOTE]
+> This approach is used by this project's ```tests``` directory.
+
+Nonetheless, I highly recommend making use of a second, cleaner approach where you don't have to directly include the library as one of your project's subdirectories:
+
+> [!IMPORTANT]
+> For this approach, your ```CMake``` build system should use at least ```CMake v3.14.```.
+
+You can just fetch it using ```FetchContent```, and then link the library as follows:
+
+Your project's main ```CMakeLists.txt```:
+```
+...
+
+include(FetchContent)
+
+FetchContent_Declare( cpp-safe-io 
+    GIT_REPOSITORY  https://github.com/DanielRamirez404/Cpp-Safe-IO.git 
+    GIT_TAG         v1.1.0
+    GIT_SHALLOW     TRUE 
+) 
+
+FetchContent_MakeAvailable(cpp-safe-io)
+
+target_link_libraries(YourExecutable CppSafeIO)
+
+...
+```
+
 ## How to use
 
 You only need to include the ```cpp-safe-io.h``` header file. Henceforth, all of the library's functions will be available inside of the ```CppSafeIO``` namespace, similarly to the ```std``` namespace of ```C++```'s standard library. Here's a simple example showcasing a program that won't exit until the enter key is pressed. 
