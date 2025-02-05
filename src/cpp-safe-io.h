@@ -35,7 +35,7 @@ namespace CppSafeIO
         ignoreExceedingInput();
 
         if (hasFailed)
-            throw std::runtime_error("The entered input cannot be successfully converted to the datatype that was provided\n");
+            throw std::runtime_error("The entered input cannot be successfully converted to the datatype that was provided");
 
         return input;
     }
