@@ -42,14 +42,19 @@ void CppSafeIO::pressEnterToContinue()
     ignoreExceedingInput();
 }
 
-bool CppSafeIO::parseYesNoInput()
-{
+bool CppSafeIO::parseYesNoInput(char yesChar, char noChar) {
     auto input{ std::tolower(getInput<unsigned char>()) };
     
-    if (input != 'y' && input != 'n')
+    if (input != yesChar && input != noChar)
         throw std::runtime_error("Input character was not a y/n character");
 
-    return input == 'y';
+    return input == yesChar;
+
+}
+
+bool CppSafeIO::parseYesNoInput()
+{
+    return parseYesNoInput('y', 'n');
 }
 
 std::string CppSafeIO::getInputLine()

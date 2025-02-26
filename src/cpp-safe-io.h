@@ -7,6 +7,7 @@ namespace CppSafeIO
     void clearConsole();
     void pressEnterToContinue();
     void ignoreExceedingInput();
+    bool parseYesNoInput(char yesChar, char noChar);
     bool parseYesNoInput();
     std::string getInputLine();
 
