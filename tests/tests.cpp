@@ -29,7 +29,7 @@ int main()
     catch (const std::exception& exception)
     {
         std::cout << "Your input is not valid\n"
-                  << "Error: " << exception.what();
+                  << "Error: " << exception.what() << '\n';
     
         return 1;
     }
