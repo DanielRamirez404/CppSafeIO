@@ -1,13 +1,13 @@
 # How to run the tests
 
 > [!NOTE]
-> Requirements: ```Cmake```, ```Make``` and a ```C++``` compiler previously installed.  
+> Requirements: ```Cmake``` configured with your prefered build system, and a ```C++``` compiler previously installed.  
 
-You have to create a ```build``` subdirectory inside of this one, and once you go there, run the commands: ```cmake ..``` and ```make``` on your shell, in that very order. This will create an executable that you'll be able to run.
+You can just build the ```Tests``` executable file by running this directory's build script. Here's an example that should work on ```Linux``` using ```make``` as your build system. It works by running the following command on this directory using ```bash```:
 
-> [!TIP]
-> You can also chain the commands (including the creation of the build subdirectory) in order to create the executable file as follows:
->   ```
->   mkdir build && cd build && cmake .. && make
->   ```
-> This should work at least on both ```Linux```'s terminal and ```Windows```'s ```CMD```.
+```
+mkdir build && cd build && cmake .. && make && ./Tests
+```
+
+> [!NOTE]
+> Notice that this command automatically runs the executable file after being built. 
