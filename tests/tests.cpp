@@ -20,15 +20,23 @@ int main()
         auto integer{ CppSafeIO::getInput<int>()  };
         std::cout << "Your integer is: " << integer << '\n';
 
-        std::cout << "Did you like the library? (y/n): ";
-        auto isUserCool{ CppSafeIO::parseYesNoInput() };
+        std::cout << "\nEnter a yes character: ";
+        auto yesCharacter{ CppSafeIO::getInput<char>() };
+        std::cout << "Enter a no character: ";
+        auto noCharacter{ CppSafeIO::getInput<char>() };
+
+        std::cout << "Did you like the library? (use your yes/no characters): ";
+        auto isUserCool{ CppSafeIO::parseYesNoInput(yesCharacter, noCharacter) };
 
         auto message { (isUserCool) ? "Thank you! <3" : "ouch..." };
         std::cout << message << '\n';
     }
     catch (const std::exception& exception)
     {
-        std::cout << "Your input is not valid\n"
+
+        CppSafeIO::clearConsole();
+
+        std::cerr << "Your input is not valid\n"
                   << "Error: " << exception.what() << '\n';
     
         return 1;

@@ -43,13 +43,18 @@ void CppSafeIO::pressEnterToContinue()
 }
 
 bool CppSafeIO::parseYesNoInput(char yesChar, char noChar) {
+    yesChar = std::tolower(yesChar);
+    noChar = std::tolower(noChar);
+
+    if (yesChar == noChar)
+        throw std::runtime_error("y/n characters cannot be the same one.");
+
     auto input{ std::tolower(getInput<unsigned char>()) };
     
     if (input != yesChar && input != noChar)
         throw std::runtime_error("Input character was not a y/n character");
 
     return input == yesChar;
-
 }
 
 bool CppSafeIO::parseYesNoInput()
