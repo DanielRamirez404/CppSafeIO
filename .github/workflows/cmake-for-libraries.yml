@@ -45,7 +45,7 @@ jobs:
       run: |
         tests_dir="${{ github.workspace }}/tests"
         echo "tests-dir=$tests_dir" >> "$GITHUB_OUTPUT"
-        echo "build-dir=$tests_dir/build" >> "$GITHUB_OUTPUT
+        echo "build-dir=$tests_dir/build" >> "$GITHUB_OUTPUT"
 
     - name: Configure CMake
       run: >
