@@ -5,15 +5,17 @@
 #include <stdexcept>
 #include <limits>
 
+
 #if defined _WIN32
-    #include <conio.h>
+    //#include <conio.h> //uncomment if your compiler supports conio.h
 #endif
 
 void CppSafeIO::clearConsole() 
 {
     #if defined _WIN32
 
-        clrscr();
+        system("cls");
+        //clrsrc(); //uncomment if your compiler supports conio.h, and comment out the previous statement
 
     #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
 
@@ -24,7 +26,7 @@ void CppSafeIO::clearConsole()
 
         std::cout << "\x1b[2J\x1b[H";
 
-    #elif defined (__APPLE__)
+    #elif defined (__APPLE__) 
 
         system("clear");
 
