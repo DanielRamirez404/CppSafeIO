@@ -60,4 +60,4 @@ jobs:
 
     - name: Test with Ctest
       working-directory: ${{ steps.directories.outputs.build-dir }}
-      run: ctest --build-config ${{ matrix.build_type }}
+      run: ctest -V --build-config ${{ matrix.build_type }}
