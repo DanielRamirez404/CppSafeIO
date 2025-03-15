@@ -5,17 +5,23 @@
 #include <stdexcept>
 #include <limits>
 
-
-#if defined _WIN32
-    //#include <conio.h> //uncomment if your compiler supports conio.h
+#if defined(_WIN32) && defined(INCLUDE_CONIO_FOR_IO) 
+    #include <conio.h>
 #endif
 
 void CppSafeIO::clearConsole() 
 {
-    #if defined _WIN32
+    #if defined (_WIN32)
+        
+        #if defined(INCLUDE_CONIO_FOR_IO)
 
-        system("cls");
-        //clrsrc(); //uncomment if your compiler supports conio.h, and comment out the previous statement
+            clrsrc(); 
+
+        #else
+
+            system("cls");
+        
+        #endif
 
     #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
 
@@ -40,8 +46,16 @@ void CppSafeIO::ignoreExceedingInput()
 
 void CppSafeIO::pressEnterToContinue()
 {
-    std::cin.get();
-    ignoreExceedingInput();
+    #if defined(_WIN32) && defined(INCLUDE_CONIO_FOR_IO) 
+        
+        while( getch() != '\r' );
+
+    #else
+    
+        std::cin.get();
+        ignoreExceedingInput();
+
+    #endif
 }
 
 bool CppSafeIO::parseYesNoInput(char yesChar, char noChar) {

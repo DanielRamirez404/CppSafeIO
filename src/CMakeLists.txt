@@ -1,2 +1,15 @@
 add_library(${CPP_SAFE_IO} STATIC cppsafeio.cpp)
 target_include_directories(${CPP_SAFE_IO} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+if(NOT DEFINED INCLUDE_CONIO_FOR_IO)
+    option(INCLUDE_CONIO_FOR_IO "Flag for including the conio.h header file" OFF)
+endif()
+
+if(INCLUDE_CONIO_FOR_IO)
+    message(STATUS "Set flag for including conio.h header file for I/O operations")
+    if (NOT WIN32)
+        message(FATAL_ERROR "Non-Windows OS detected.\nThe conio.h library is not available on other OSs. Terminating...")
+    else()
+        target_compile_definitions(${CPP_SAFE_IO} PRIVATE INCLUDE_CONIO_FOR_IO)
+    endif()
+endif()
