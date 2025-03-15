@@ -43,9 +43,9 @@ jobs:
       id: directories
       shell: bash
       run: |
-        tests_dir="${{ github.workspace }}/tests"
-        echo "tests-dir=$tests_dir" >> "$GITHUB_OUTPUT"
-        echo "build-dir=$tests_dir/build" >> "$GITHUB_OUTPUT"
+        main_dir="${{ github.workspace }}"
+        echo "main-dir=$main_dir" >> "$GITHUB_OUTPUT"
+        echo "build-dir=$main_dir/build" >> "$GITHUB_OUTPUT"
 
     - name: Configure CMake
       run: >
@@ -53,11 +53,11 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -S ${{ steps.directories.outputs.tests-dir }}
+        -S ${{ steps.directories.outputs.main-dir }}
 
-    - name: Build
+    - name: Build with CMake
       run: cmake --build ${{ steps.directories.outputs.build-dir }} --config ${{ matrix.build_type }}
 
-    - name: Test
+    - name: Test with Ctest
       working-directory: ${{ steps.directories.outputs.build-dir }}
       run: ctest --build-config ${{ matrix.build_type }}
