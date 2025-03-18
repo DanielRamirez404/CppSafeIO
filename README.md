@@ -31,9 +31,6 @@ target_link_libraries(YourExecutable ${CPP_SAFE_IO})
 ...
 ```
 
-> [!NOTE]
-> This approach is used by this project's ```tests``` directory.
-
 Nonetheless, I highly recommend making use of a second, cleaner approach where you don't have to directly include the library as one of your project's subdirectories:
 
 > [!IMPORTANT]
@@ -49,7 +46,7 @@ include(FetchContent)
 
 FetchContent_Declare( cppsafeio 
     GIT_REPOSITORY  https://github.com/DanielRamirez404/CppSafeIO.git
-    GIT_TAG         v2.0.0
+    GIT_TAG         v2.1.0
     GIT_SHALLOW     TRUE 
 ) 
 
@@ -62,6 +59,13 @@ target_link_libraries(YourExecutable ${CPP_SAFE_IO})
 
 > [!NOTE]
 > You can optionally change the value of the ```CPP_SAFE_IO``` variable before the  ```FetchContent_MakeAvailable()``` call, if you wish so, since it won't be overwritten and it'll show up when building the project.
+
+> [!IMPORTANT]
+> If you want to use ```Windows```'s ```conio.h``` header file's functions in this library, you should set the ```INCLUDE_CONIO_FOR_IO``` option to ```ON```, since it's automatically off. You can try something like this on your project's main ```CMakeLists.txt```:
+>```
+> option(INCLUDE_CONIO_FOR_IO "Flag for including the conio.h header file" ON)
+> ```
+
 
 ## How to use
 
@@ -96,7 +100,17 @@ int main()
 * ```bool parseYesNoInput()```: Overloaded version of the previous function with both ```y``` and ```n``` as yesChar and noChar, respectively.
 * ```std::string getInputLine():``` gets all entered input until a line break, as a ```std::string```.
 
-## Testing
+## Building & Testing
+
+You can also just build and test the library independently from your projects, here's an example using ```bash``` in the library's directory:
+
+```
+cmake -B build -DCMAKE_BUILD_TYPE=Release -S . && cmake --build build --config Release && cd build && ctest -V && cd .. 
+```
+
+As you can see, ```CMake``` is used to build the project and ```CTest``` to run the automated tests (the ```CppSafeIO-AutomatedTests``` executable)!
 
 > [!TIP]
-> You can test this library's functions in the ```tests``` subdirectory.
+> If you wish to test out this library's functions, you can run the ```CppSafeIO-Tests``` executable. If it doesn't throw any exceptions or show any anomalies while getting input or cleaning output, then it should be working properly.
+
+*Both of these tests' source code are available on the ```tests``` directory.*
